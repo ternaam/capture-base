@@ -1,4 +1,5 @@
- /* jQuery JavaScript Library v2.2.0
+/*!
+ * jQuery JavaScript Library v2.2.0
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -9809,7 +9810,7 @@ var
 
 jQuery.noConflict = function( deep ) {
 	if ( window.$ === jQuery ) {
-		window.$ = _jQuery;
+		window.$ = _$;
 	}
 
 	if ( deep && window.jQuery === jQuery ) {
@@ -9828,4 +9829,3 @@ if ( !noGlobal ) {
 
 return jQuery;
 }));
-
