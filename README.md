@@ -3,7 +3,7 @@ Tool to help keep score on a massive capture-the-base game
 
 ## in dutch:
 
-Deze tool wordt gemaakt voor het zondagspel van de RSW2016 scouting regio west brabant.
+Deze tool wordt gemaakt voor het spel, een keer ergens wat ik niet wil laten indexen door google voordat het zover is.
 
 Het idee is dat er rond de 20 groepjes gaan proberen om rond de 30 posten te beheersen. Als ze bij de centrale post aankomen met een bewijs dat ze de één van de posten hebben overgenomen dan word de post toegewezen aan dit groepje, en gaat de teller lopen.
 Een ander groepje kan vervolgens de post weer afpakken door daarna met een bewijs te komen, dan zal de post van eigenaar veranderen en de teller van de oude eigenaar stoppen en die van de nieuwe beginnne.
