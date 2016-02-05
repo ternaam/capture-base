@@ -1,5 +1,7 @@
 # capture-base
-Tool to help keep score on a massive capture-the-base game
+Tool to help keep score on a large scale capture-the-base game
+
+Try the latest version of the tool on https://ternaam.github.io/capture-base
 
 ## in dutch:
 
