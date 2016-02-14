@@ -2,13 +2,24 @@ var teamNames = ["blauw", "geel",
     "groen", "paars", "deze patrouille is de beste", 
     "awesombie-hunters"];
 
-var nOfPosts = 30;
+var nOfPosts = 5;
 
 function Team (name) {
   this.name = name;
   this.colour = PickRandomColour(name);
   this.pointTotal = 0;
   this.dom = null;
+
+  this.UpdateNrOfPostsOwned = function(){
+    var count = 0;
+    var self = this;
+    posts.forEach(function(item, index, array){
+      if(item.owner === self){
+        count++;
+      }
+    });
+    this.dom.children(".nrOfPostsOwned").text("heeft nu: " + count + " posten");
+  }
 }
 
 function CaptureEvent (team, timestamp) {
@@ -26,6 +37,10 @@ function Post (nr){
     this.owner = team;
     this.eventStack.push(new CaptureEvent(team, Date.now()));
     this.dom.children(".ownedBy").text("is nu van: " + team.name);
+    team.UpdateNrOfPostsOwned();
+    var previousCapture = this.eventStack[this.eventStack.length - 2];
+    if(previousCapture)
+      previousCapture.team.UpdateNrOfPostsOwned();
   }
   this.GetCurrentTimer = function() {
     if(this.owner)
@@ -57,6 +72,7 @@ $("#patrouilles").empty();
 
 $.each(teams, function(){
   var li = $("<li></li>").text(this.name).css('background-color', this.colour).data("team", this);
+  li.append($("<div></div>").text("Nog geen posten").addClass("nrOfPostsOwned"));
   $("#patrouilles").append(li);
   this.dom = li;
 });
