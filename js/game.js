@@ -30,14 +30,33 @@ for(var i = 0; i<nOfPosts; i++)
   posts.push(new Post(i+1));
 }
 
+var selectedTeam = null;
 
 $("#posten").empty();
 $("#patrouilles").empty();
 
 $.each(teams, function(){
-  $("#patrouilles").append($("<li></li>").text(this.name).css('background-color', this.colour));
+  $("#patrouilles").append($("<li></li>").text(this.name).css('background-color', this.colour).data("team", this));
 });
 
 $.each(posts, function(){
-  $("#posten").append($("<li></li>").text("Post " + this.nr).css('background-color', "white"));
+  $("#posten").append($("<li></li>").text("Post " + this.nr).css('background-color', "white").data("post", this));
 });
+
+function DeselectAllPatrouilles(){
+  $("#patrouilles > li").removeClass("selected");
+  selectedTeam = null;
+}
+
+function SelectPatrouille(pat) {
+  DeselectAllPatrouilles();
+  $(pat).addClass("selected");
+  selectedTeam = $(pat).data("team");
+}
+
+$('#patrouilles > li').click(function(){
+  console.log(this);
+  SelectPatrouille(this);
+});
+
+
