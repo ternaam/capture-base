@@ -13,6 +13,9 @@ function Team (name) {
 function Post (nr){
   this.nr = nr;
   this.owner = null;
+  this.CaptureEvent = function(team){
+    this.owner = team;
+  }
 }
 
 function PickRandomColour(seed) {
@@ -54,9 +57,18 @@ function SelectPatrouille(pat) {
   selectedTeam = $(pat).data("team");
 }
 
+function CaptureBase(post) {
+  $(post).data("post").CaptureEvent(selectedTeam);
+  $(post).css('background-color', selectedTeam.colour);
+}
+
 $('#patrouilles > li').click(function(){
-  console.log(this);
   SelectPatrouille(this);
+});
+
+$('#posten > li').click(function(){
+  if(selectedTeam)
+    CaptureBase(this);
 });
 
 
