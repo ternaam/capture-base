@@ -25,6 +25,7 @@ function Post (nr){
     this.dom.css('background-color', selectedTeam.colour);
     this.owner = team;
     this.eventStack.push(new CaptureEvent(team, Date.now()));
+    this.dom.children(".ownedBy").text("is nu van: " + team.name);
   }
   this.GetCurrentTimer = function() {
     if(this.owner)
@@ -62,6 +63,7 @@ $.each(teams, function(){
 
 $.each(posts, function(){
   var li = $("<li></li>").text("Post " + this.nr).css('background-color', "white").data("post", this);
+  li.append($("<div></div>").text("").addClass("ownedBy"));
   $("#posten").append(li);
   this.dom = li;
 });
