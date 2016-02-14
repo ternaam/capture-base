@@ -11,13 +11,26 @@ function Team (name) {
   this.dom = null;
 }
 
+function CaptureEvent (team, timestamp) {
+  this.team = team;
+  this.timestamp = timestamp;
+}
+
 function Post (nr){
   this.nr = nr;
   this.owner = null;
   this.dom = null;
-  this.CaptureEvent = function(team){
+  this.eventStack = new Array();
+  this.GetCaptured = function(team){
     this.dom.css('background-color', selectedTeam.colour);
     this.owner = team;
+    this.eventStack.push(new CaptureEvent(team, Date.now()));
+  }
+  this.GetCurrentTimer = function() {
+    if(this.owner)
+      return Date.now() - this.eventStack[this.eventStack.length - 1].timestamp;
+    else
+      return 0;
   }
 }
 
@@ -65,7 +78,7 @@ function SelectPatrouille(pat) {
 }
 
 function CaptureBase(post) {
-  $(post).data("post").CaptureEvent(selectedTeam);
+  $(post).data("post").GetCaptured(selectedTeam);
 }
 
 $('#patrouilles > li').click(function(){
