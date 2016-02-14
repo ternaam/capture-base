@@ -2,7 +2,7 @@ var teamNames = ["blauw", "geel",
     "groen", "paars", "deze patrouille is de beste", 
     "awesombie-hunters"];
 
-var nOfPosts = 5;
+var nOfPosts = 30;
 
 function Team (name) {
   this.name = name;
@@ -48,6 +48,17 @@ function Post (nr){
     else
       return 0;
   }
+  this.UpdateTimer = function(){
+    var temp = this.GetCurrentTimer();
+    var minutes = Math.floor(temp/60000);
+    temp %= 60000;
+    var seconds = Math.floor(temp/1000);
+    var pseconds = ("0" + seconds).slice(-2);
+    temp %= 1000;
+    var msecs = Math.floor(temp / 100);
+    this.dom.children(".timer").text(minutes + ":" + pseconds + ":" + msecs);
+  }
+
 }
 
 function PickRandomColour(seed) {
@@ -80,6 +91,7 @@ $.each(teams, function(){
 $.each(posts, function(){
   var li = $("<li></li>").text("Post " + this.nr).css('background-color', "white").data("post", this);
   li.append($("<div></div>").text("").addClass("ownedBy"));
+  li.append($("<div></div>").text("").addClass("timer"));
   $("#posten").append(li);
   this.dom = li;
 });
@@ -108,4 +120,9 @@ $('#posten > li').click(function(){
     CaptureBase(this);
 });
 
-
+function TimerTick(){
+  posts.forEach(function(item, index, array){
+    item.UpdateTimer();
+  });
+}
+var interval = setInterval(TimerTick, 110);
