@@ -8,12 +8,15 @@ function Team (name) {
   this.name = name;
   this.colour = PickRandomColour(name);
   this.pointTotal = 0;
+  this.dom = null;
 }
 
 function Post (nr){
   this.nr = nr;
   this.owner = null;
+  this.dom = null;
   this.CaptureEvent = function(team){
+    this.dom.css('background-color', selectedTeam.colour);
     this.owner = team;
   }
 }
@@ -39,11 +42,15 @@ $("#posten").empty();
 $("#patrouilles").empty();
 
 $.each(teams, function(){
-  $("#patrouilles").append($("<li></li>").text(this.name).css('background-color', this.colour).data("team", this));
+  var li = $("<li></li>").text(this.name).css('background-color', this.colour).data("team", this);
+  $("#patrouilles").append(li);
+  this.dom = li;
 });
 
 $.each(posts, function(){
-  $("#posten").append($("<li></li>").text("Post " + this.nr).css('background-color', "white").data("post", this));
+  var li = $("<li></li>").text("Post " + this.nr).css('background-color', "white").data("post", this);
+  $("#posten").append(li);
+  this.dom = li;
 });
 
 function DeselectAllPatrouilles(){
@@ -59,7 +66,6 @@ function SelectPatrouille(pat) {
 
 function CaptureBase(post) {
   $(post).data("post").CaptureEvent(selectedTeam);
-  $(post).css('background-color', selectedTeam.colour);
 }
 
 $('#patrouilles > li').click(function(){
