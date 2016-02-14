@@ -1,6 +1,6 @@
-var teamNames = ["blauw", "geel",
-    "groen", "paars", "deze patrouille is de beste", 
-    "awesombie-hunters"];
+var teamNames = ["The Walking Hopman", "Troop troep",
+    "Zombies vs gidsen", "The legens of FrankenScout", "BadenPowellRises", 
+    "awesombie-hunters", "Tent of the living dead"];
 
 var nOfPosts = 30;
 
@@ -57,6 +57,18 @@ function Post (nr){
     temp %= 1000;
     var msecs = Math.floor(temp / 100);
     this.dom.children(".timer").text(minutes + ":" + pseconds + ":" + msecs);
+  }
+  this.GetTotalTimeForTeam = function(team){
+    var total = 0;
+    for(var i = 0; i<this.eventStack.length-1; i++){
+      if(this.eventStack[i].team === team){
+        total += this.eventStack[i + 1].timestamp - this.eventStack[i].timestamp;
+      }
+    }
+    if(this.owner === team){
+      total += this.GetCurrentTimer();
+    }
+    return total;
   }
 
 }
