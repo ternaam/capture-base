@@ -106,16 +106,31 @@ function Post (nr){
 
   this.UpdateTimer = function(){
     var temp = this.GetCurrentTimer();
-    var minutes = Math.floor(temp/60000);
-    temp %= 60000;
-    var seconds = Math.floor(temp/1000);
-    var pseconds = ("0" + seconds).slice(-2);
-    temp %= 1000;
-    var msecs = Math.floor(temp / 100);
-    this.dom.children(".timer").text(minutes + ":" + pseconds + ":" + msecs);
+    var text = PrettyTimespan(temp);
+    this.dom.children(".timer").text(text);
   }
 
 }
+
+function PrettyTimespan(span){
+  var temp = span;
+  var minutes = Math.floor(temp/60000);
+  temp %= 60000;
+  var seconds = Math.floor(temp/1000);
+  var pseconds = ("0" + seconds).slice(-2);
+  temp %= 1000;
+  var msecs = Math.floor(temp / 100);
+  return minutes + ":" + pseconds + ":" + msecs;
+}
+
+function GetTotalTimeForAllPosts(team){
+  var retval = 0;
+  $.each(posts, function(){
+    retval += this.GetTotalTimeForTeam(team);
+  });
+  return retval;
+}
+
 
 function PickRandomColour(seed) {
   return 'hsl('+Math.floor(Math.random()*361)+',80%,65%)';
@@ -167,6 +182,18 @@ function CaptureBase(post) {
   $(post).data("post").GetCaptured(selectedTeam);
 }
 
+function ShowFinalScore() {
+  $("body").append($("<div></div>").addClass("finalScorePopup"));
+
+  var list = $("<ul></ul>");
+  $.each(teams, function(){
+    var li = $("<li></li>").text(this.name).css('background-color', this.colour).data("team", this);
+    li.append($("<div></div>").text("" + PrettyTimespan(GetTotalTimeForAllPosts(this)) +"").addClass("finalscoreforteam"));
+    list.append(li);
+  });
+  $(".finalScorePopup").append(list);
+}
+
 $('#patrouilles > li').click(function(){
   SelectPatrouille(this);
 });
@@ -175,6 +202,8 @@ $('#posten > li').click(function(){
   if(selectedTeam)
     CaptureBase(this);
 });
+
+$('#finalscore').click(ShowFinalScore);
 
 function TimerTick(){
   posts.forEach(function(item, index, array){
