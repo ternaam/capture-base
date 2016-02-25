@@ -35,15 +35,18 @@ function Post (nr){
   this.totalsTable = new Array();
 
   this.GetCaptured = function(team){
-    var previousCapture = this.eventStack[this.eventStack.length - 2];
-    if(previousCapture){
-      previousCapture.team.UpdateNrOfPostsOwned();
-      this.UpdateTotalForTeam(previousCapture.team);
-    }
-
+    var capMoment = Date.now();
     this.dom.css('background-color', selectedTeam.colour);
     this.owner = team;
-    this.eventStack.push(new CaptureEvent(team, Date.now()));
+
+    if(this.eventStack.length > 0){
+      var previousCapture = this.eventStack[this.eventStack.length - 1];
+      previousCapture.team.UpdateNrOfPostsOwned();
+      this.UpdateTotalForTeam(previousCapture.team, capMoment);
+      console.log("just updated: " + previousCapture.team.name);
+    }
+
+    this.eventStack.push(new CaptureEvent(team, capMoment));
     this.dom.children(".ownedBy").text("is nu van: " + team.name);
     team.UpdateNrOfPostsOwned();
 
@@ -58,7 +61,7 @@ function Post (nr){
   }
 
   this.GetTotalTimeForTeam = function(team){
-    var savedVal = this.totalsTable[team];
+    var savedVal = this.totalsTable[team.name];
     var total = 0;
 
     if(savedVal)
@@ -76,7 +79,9 @@ function Post (nr){
     var total = 0;
     for(var i = 0; i<this.eventStack.length-1; i++){
       if(this.eventStack[i].team === team){
-        total += this.eventStack[i + 1].timestamp - this.eventStack[i].timestamp;
+
+        console.log("gettottime" + this.eventStack[i + 1].timestamp + ", " + this.eventStack[i].timestamp);
+        total += (this.eventStack[i + 1].timestamp - this.eventStack[i].timestamp);
       }
     }
     if(this.owner === team){
@@ -86,15 +91,17 @@ function Post (nr){
   }
 
   this.EnsureEntryInTotalsTable = function(team){
-    if(!this.totalsTable[team]){
-      this.totalsTable[team] = 0;
-      console.log("ensureentries" + this.totalsTable[team]);
+    if(!this.totalsTable[team.name]){
+      this.totalsTable[team.name] = 0;
+      console.log("ensureentries" + this.totalsTable[team.name]);
     }
   }
 
-  this.UpdateTotalForTeam = function(team){
-    this.totalsTable[team] += this.GetCurrentTimer();
-    console.log("updatetotal: " + this.totalsTable[team]);
+  this.UpdateTotalForTeam = function(team, timestamp){
+    var timespan = timestamp - this.eventStack[this.eventStack.length - 1].timestamp;
+        console.log("updateTot" + this.eventStack[this.eventStack.length - 1].timestamp + ", " + timestamp);
+    this.totalsTable[team.name] += timespan;
+    console.log("updatetotal: " + this.totalsTable[team.name]);
   }
 
   this.UpdateTimer = function(){
