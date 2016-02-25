@@ -183,8 +183,6 @@ function CaptureBase(post) {
 }
 
 function ShowFinalScore() {
-  $("body").append($("<div></div>").addClass("finalScorePopup"));
-
   var list = $("<ul></ul>");
   $.each(teams, function(){
     var li = $("<li></li>").text(this.name).css('background-color', this.colour).data("team", this);
