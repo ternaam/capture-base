@@ -1,6 +1,12 @@
-var teamNames = ["The Walking Hopman", "Troop troep",
-    "Zombies vs gidsen", "The legens of FrankenScout", "BadenPowellRises", 
-    "awesombie-hunters", "Tent of the living dead"];
+var teamNames = [
+"Zombie girls ", "D.Z.V.D.B. ", "Breinbrekers ", "Bonecrashers ", 
+"Bloederige Wolven ", "ZomSpi's ", "Zombie killers ", "The walking dead ", 
+"Tienduizend Scouting Zombies ", "Diva's van Doeve ", "The bloody unicorns ", "Hongerige Vossen ", 
+"Bloedzuigers ", "The Walking Scouts ", "The Survivors ", "The Walking SPI ", 
+"Gevaarlijke Valken ", "volgt nog ", "Timberwolves "
+    ];
+
+
 
 var nOfPosts = 30;
 
