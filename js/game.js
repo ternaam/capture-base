@@ -8,7 +8,9 @@ var teamNames = [
 
 
 
-var nOfPosts = 30;
+var nOfPosts = 16;
+var nOfSpecialPosts = 6;
+var specialFactor = 2;
 
 function Team (name) {
   this.name = name;
@@ -39,6 +41,7 @@ function Post (nr){
   this.dom = null;
   this.eventStack = new Array();
   this.totalsTable = new Array();
+  this.factor = 1;
 
   this.GetCaptured = function(team){
     var capMoment = Date.now();
@@ -78,7 +81,7 @@ function Post (nr){
     if(this.owner === team)
       total += this.GetCurrentTimer();
 
-    return total;
+    return total * this.factor;
   }
 
   this.GetTotalTimeForTeamBackup = function(team){
@@ -93,7 +96,7 @@ function Post (nr){
     if(this.owner === team){
       total += this.GetCurrentTimer();
     }
-    return total;
+    return total * this.factor;
   }
 
   this.EnsureEntryInTotalsTable = function(team){
@@ -116,6 +119,17 @@ function Post (nr){
     this.dom.children(".timer").text(text);
   }
 
+}
+
+function SpecialPost(nr, factor){
+  var that = new Post(nr);
+  that.factor = factor;
+  that.UpdateTimer = function(){
+    var temp = that.GetCurrentTimer();
+    var text = PrettyTimespan(temp);
+    this.dom.children(".timer").text(text + " × " + factor);
+  }
+  return that;
 }
 
 function PrettyTimespan(span){
@@ -148,7 +162,13 @@ $.each(teamNames, function() {
 });
 
 var posts = new Array();
-for(var i = 0; i<nOfPosts; i++)
+
+var i = 0;
+for(; i<nOfSpecialPosts; i++)
+{
+  posts.push(new SpecialPost(i+1, specialFactor));
+}
+for(; i<nOfPosts; i++)
 {
   posts.push(new Post(i+1));
 }
