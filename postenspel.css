@@ -55,12 +55,16 @@ ul {
     margin: 0;
     padding: 10px;
 }
-#finalscore {
+.buttonbar > div {
     background: white none repeat scroll 0 0;
     border-radius: 5px;
     display: inline-block;
     margin: 0;
     padding: 10px;
+}
+.finalScorePopup {
+    display: flex;
+    flex: 0 1 auto;
 }
 .finalScorePopup ul {
     width: auto;

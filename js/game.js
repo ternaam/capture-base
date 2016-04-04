@@ -216,6 +216,10 @@ function ShowFinalScore() {
     list.append(li);
   });
   $(".finalScorePopup").append(list);
+  $(".finalScorePopup").show();
+}
+function HideScore() {
+  $(".finalScorePopup").hide();
 }
 
 $('#patrouilles > li').click(function(){
@@ -228,6 +232,7 @@ $('#posten > li').click(function(){
 });
 
 $('#finalscore').click(ShowFinalScore);
+$('#hidescore').click(HideScore);
 
 function TimerTick(){
   posts.forEach(function(item, index, array){
