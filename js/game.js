@@ -164,13 +164,15 @@ $.each(teamNames, function() {
 var posts = new Array();
 
 var i = 0;
-for(; i<nOfSpecialPosts; i++)
-{
-  posts.push(new SpecialPost(i+1, specialFactor));
-}
-for(; i<nOfPosts; i++)
+var nOfNormalPosts = nOfPosts - nOfSpecialPosts;
+for(; i<nOfNormalPosts; i++)
 {
   posts.push(new Post(i+1));
+}
+
+for(; i<nOfPosts; i++)
+{
+  posts.push(new SpecialPost(i+1, specialFactor));
 }
 
 var selectedTeam = null;
