@@ -242,3 +242,7 @@ function TimerTick(){
   });
 }
 var interval = setInterval(TimerTick, 110);
+
+function SureLeave(){
+  return "Als je doorgaat ben je alle standen kwijt, dit kan niet meer hersteld worden";
+}
