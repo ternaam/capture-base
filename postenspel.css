@@ -62,6 +62,13 @@ ul {
     margin: 0;
     padding: 10px;
 }
+#zelf{
+  background: none;
+}
+#zelf a{
+  color: white;
+  font-size: 0.8em;
+}
 .finalScorePopup {
     display: flex;
     flex: 0 1 auto;

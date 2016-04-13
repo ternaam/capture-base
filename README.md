@@ -29,7 +29,7 @@ En nog een aantal _nice-to-haves_ (niet noodzakelijk, niet aan toegekomen)
 ### Makkelijk en snel
 
 Als je geen ervaring met github hebt, maar wel de namen en aantal posten wil aanpassen, kan je zo makkelijk doen:
-* download de website als zip, dat kan op de knop hier rechtsboven, of op [deze link]("https://github.com/ternaam/capture-base/archive/gh-pages.zip").
+* download de website als zip, dat kan op de knop hier rechtsbovenaan deze site (Die met "Download ZIP" erop), of op [deze link](https://github.com/ternaam/capture-base/archive/gh-pages.zip).
 * pak de zip uit op je computer.
 * de dingen die je wilt veranderen zijn waarschijnlijk 3 variabelen bovenin js/game.js:
   * [`teamNames`](https://github.com/ternaam/capture-base/blob/gh-pages/js/game.js#L1), Dit is een lijst met alle patrouillenamen.
