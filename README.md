@@ -35,6 +35,7 @@ Als je geen ervaring met github hebt, maar wel de namen en aantal posten wil aan
   * [`teamNames`](https://github.com/ternaam/capture-base/blob/gh-pages/js/game.js#L1), Dit is een lijst met alle patrouillenamen.
   * [`nOfPosts`](https://github.com/ternaam/capture-base/blob/gh-pages/js/game.js#L11), Het totaal aantal posten dat je hebt.
   * [`nOfSpecialPosts`](https://github.com/ternaam/capture-base/blob/gh-pages/js/game.js#L12), Het aantal speciale posten, (je krijgt daar `specialFactor` keer zoveel punten per seconde).
+* Dubbelklik op "index.html", Open het liefst in Firefox of Chrome, maar Edge doet het ook goed.
 * Laat even weten als je het gebruikt heb en wat je ervan vond, altijd leuk om te horen dat je software vaker dan één keer gebruikt wordt :-) .
 
 ### Alles aanpassen en beter maken
